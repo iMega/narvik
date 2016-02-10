@@ -1,0 +1,9 @@
+.git
+.dockerignore
+.gitignore
+Makefile
+README.md
+Dockerfile
+composer.lock
+composer.json
+sites-enabled
