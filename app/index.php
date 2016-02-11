@@ -27,7 +27,7 @@ class iMegaTeleportSite
     /**
      * Send mail
      */
-    public function mail($to, $subject, $message, $altMessage = '')
+    public function sendmail($to, $subject, $message, $altMessage = '')
     {
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -73,11 +73,13 @@ $message = '';
 if ('activate' == $_GET['action']) {
     $subject = 'Подтвердите email';
     $message = $iMegaTeleportSite->template('activate');
+    $message = str_replace('{{token}}', $_GET['token'], $message);
 }
 
 if ('account' == $_GET['action']) {
     $subject = 'Ваша учетная запись';
     $message = $iMegaTeleportSite->template('account');
+    $message = str_replace(['{{user}}','{{pass}}'], [$_GET['user'],$_GET['pass']], $message);
 }
 
-$iMegaTeleportSite->mail($_GET['to'], $subject, $message);
+$iMegaTeleportSite->sendmail($_GET['to'], $subject, $message);
