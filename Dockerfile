@@ -2,7 +2,10 @@ FROM alpine:3.3
 
 EXPOSE 9000
 
-RUN apk add --update php-fpm && \
+RUN apk add --update \
+        php-fpm \
+        php-openssl \
+        ca-certificates && \
     mkdir -p /tmp/nginx/client-body && \
     rm -rf /var/cache/apk/*
 
