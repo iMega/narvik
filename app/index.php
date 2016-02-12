@@ -54,11 +54,11 @@ class iMegaTeleportSite
 
     public function template($value)
     {
-        return file_get_contents("app/$value.html");
+        return file_get_contents("$value.html");
     }
 }
 
-$iMegaTeleportSite = new iMegaTeleportSite($_ENV['SMTP_USER'], $_ENV['SMTP_PASS']);
+$iMegaTeleportSite = new iMegaTeleportSite(getenv('SMTP_USER'), getenv('SMTP_PASS'));
 if (!isset($_GET['action'])) {
     echo "Wrong action";
     exit(1);
