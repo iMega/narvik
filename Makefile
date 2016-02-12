@@ -13,14 +13,14 @@ start:
 	@docker run -d --name imega_narvik \
 		--env SMTP_USER=$(SMTP_USER) \
 		--env SMTP_PASS="$(SMTP_PASS)" \
-		-p 9000:9000 \
 		imega/narvik
-
+ifeq ($(ENV),DEV)
 	@docker run -d --name imega_nginx \
 		--link imega_narvik:service \
 		-v $(CURDIR)/sites-enabled:/etc/nginx/sites-enabled \
 		$(PORT) \
 		leanlabs/nginx
+endif
 
 stop:
 	@-docker stop $(CONTAINERS)
