@@ -82,4 +82,12 @@ if ('account' == $_GET['action']) {
     $message = str_replace(['{{user}}','{{pass}}'], [$_GET['user'],$_GET['pass']], $message);
 }
 
+header("Connection: close");
+ob_start();
+phpinfo();
+$size = ob_get_length();
+header("Content-Length: $size");
+ob_end_flush();
+flush();
+
 $iMegaTeleportSite->sendmail($_GET['to'], $subject, $message);
