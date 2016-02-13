@@ -82,6 +82,8 @@ if ('account' == $_GET['action']) {
     $message = str_replace(['{{user}}','{{pass}}'], [$_GET['user'],$_GET['pass']], $message);
 }
 
+$message = str_replace(['{{host}}','{{host_cdn}}'], [$_GET['host'], $_GET['host_cdn']], $message);
+
 header("Connection: close");
 ob_start();
 phpinfo();
