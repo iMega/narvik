@@ -1,4 +1,4 @@
-IMAGE = imega/narvik
+TELEPORT_MAILER ?= imegateleport/narvik
 CONTAINERS = imega_narvik imega_nginx
 PORT = -p 80:80
 ENV = PROD
@@ -7,7 +7,10 @@ SMTP_PASS = pass
 
 build:
 	@docker run --rm -v $(CURDIR):/data imega/composer:1.2.0 update
-	@docker build -t $(IMAGE) .
+	@docker build -t $(TELEPORT_MAILER) .
+
+push:
+	@docker push $(TELEPORT_MAILER):latest
 
 start:
 	@docker run -d --name imega_narvik \
@@ -29,4 +32,4 @@ clean: stop
 	@-docker rm -fv $(CONTAINERS)
 
 destroy: clean
-	@docker rmi -f $(IMAGE)
+	@docker rmi -f $(TELEPORT_MAILER)
